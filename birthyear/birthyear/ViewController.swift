@@ -6,6 +6,14 @@
 //
 
 import UIKit
+func dateTimeFormat(from date: Date) -> (Int) {
+    let calender = Calendar.current
+    let components = calender.dateComponents([.year], from: date)
+    return (
+        components.year ?? 0
+       
+    )
+}
 
 class ViewController: UIViewController {
 
@@ -19,12 +27,14 @@ class ViewController: UIViewController {
 
     
     @IBAction func calcButton(_ sender: Any) {
+        let date = Date()
+        let year = dateTimeFormat(from: date)
         let num = Int(enterYear.text ?? "") ?? 0
-        if num == 0 || num > 2025{
+        if num == 0 || num > year{
             printLabel.text = "Invalid"
         }
         else{
-            let age = 2025 - num
+            let age = year - num
             printLabel.text = String(age)
         }
     }
