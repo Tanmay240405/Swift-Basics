@@ -11,7 +11,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var totalPeople: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
-    @IBOutlet weak var totalAmountText: UITextField!
     @IBOutlet weak var tipPercent: UILabel!
     @IBOutlet weak var tipSlider: UISlider!
     @IBOutlet weak var splitAmount: UILabel!
@@ -28,14 +27,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func tipSlider(_ sender: UISlider) {
-        let tip = Int(sender.value)
+        tip = Int(sender.value)
         tipPercent.text = "Tip: \(tip)%"
         
         let percent = bill * Double(tip) / 100.0
         tipLabel.text = String(format: "%.2f", percent)
         totalAmountLabel.text = String(format: "%.2f", (bill + percent))
-        
-
         
     }
 
@@ -47,7 +44,7 @@ class ViewController: UIViewController {
     @IBAction func stepperPeople(_ sender: UIStepper) {
         people = Int(sender.value)
         totalPeople.text = "People: \(people)"
-        let str1 = bill / Double(people) + Double(tip / people)
+        let str1 = bill / Double(people) + Double(tip / people) * 10
         splitAmount.text = String(format: "%.2f", str1)
     }
     
