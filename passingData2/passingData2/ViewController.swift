@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func nextButton(_ sender: Any) {
-        performSegue(withIdentifier: "goto", sender: nil)
+        performSegue(withIdentifier: "BMI", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         data = textField.text
