@@ -1,8 +1,8 @@
 import UIKit
-
+import Foundation
 var greeting = "Hello, playground"
 
-class Student:CustomStringConvertible,Comparable {
+class Student:CustomStringConvertible,Comparable {                     // adapting
     static func < (lhs: Student, rhs: Student) -> Bool {
         return lhs.rollNo < rhs.rollNo
     }
@@ -10,8 +10,8 @@ class Student:CustomStringConvertible,Comparable {
     static func == (lhs: Student, rhs: Student) -> Bool {
         return lhs.rollNo == rhs.rollNo && lhs.firstName == rhs.firstName && lhs.lastname == rhs.lastname
     }
-    // adapting
-    var description: String {return "name of the student is \(firstName) \(lastname)"}        //computed property----------> stub----------------> conforming
+
+    var description: String {return "name of the student is \(firstName) \(lastname)"}        //computed property----------> stub ----------------> conforming
     
     let rollNo: Int
     let firstName: String
@@ -58,3 +58,23 @@ class myData {
     }
 }
 
+
+
+class iosSDP: Codable {
+    var institute: String
+    var name: String
+    var year: Int
+    init(institute: String, name: String, year: Int) {
+        self.institute = institute
+        self.name = name
+        self.year = year
+    }
+}
+var mitSDP = iosSDP(institute: "MITWPU", name: "Tanmay", year: 2025)
+
+var jsonEncoder = JSONEncoder()
+if let data = try?jsonEncoder.encode(mitSDP){
+    if let jsonString = String(data: data, encoding: .utf8){
+        print(jsonString)
+    }
+}
