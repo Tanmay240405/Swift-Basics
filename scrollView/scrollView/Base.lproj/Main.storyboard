@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SgW-Sz-rRZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="shJ-0I-kjB">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--home-->
         <scene sceneID="isP-E8-Bok">
             <objects>
                 <viewController id="SgW-Sz-rRZ" sceneMemberID="viewController">
@@ -60,16 +60,37 @@
                             <constraint firstItem="3JC-4J-hNY" firstAttribute="width" secondItem="Wsv-kQ-vr1" secondAttribute="width" id="uep-KZ-vgB"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="home" image="none" selectedImage="square.and.arrow.up" catalog="system" id="2QM-i5-bBI"/>
                     <size key="freeformSize" width="393" height="852"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMw-UN-so2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-225.19083969465649" y="148.59154929577466"/>
+            <point key="canvasLocation" x="701.52671755725191" y="148.59154929577466"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="KlY-V3-14G">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="shJ-0I-kjB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="square.and.arrow.up.badge.checkmark.fill" catalog="system" id="BMo-rK-ry3">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="SgW-Sz-rRZ" kind="relationship" relationship="viewControllers" id="HmN-A8-eXF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pUB-x2-oSx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223.66412213740458" y="148.59154929577466"/>
         </scene>
     </scenes>
     <resources>
         <image name="5" width="200" height="252"/>
         <image name="images3" width="256" height="197"/>
+        <image name="none" width="128" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
+        <image name="square.and.arrow.up.badge.checkmark.fill" catalog="system" width="120" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
