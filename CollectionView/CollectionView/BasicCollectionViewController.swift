@@ -10,7 +10,7 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class BasicCollectionViewControlerCollectionViewController: UICollectionViewController {
-    private let items = ["a", "b", "c"]
+    private let items = ["adhbsrh", "bdbhsrtb", "csdbrtsb"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
