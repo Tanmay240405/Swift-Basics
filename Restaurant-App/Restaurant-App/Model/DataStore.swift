@@ -9,14 +9,31 @@ import Foundation
 
 //create the dsta store type
 class DataStore {
+    
     private var restaurants:[Restaurant] = []
+    
+    private init() {
+        loadSampleData()
+    }
+    
+    static let shared = DataStore()
     func getRestaurants()->[Restaurant] {
         return restaurants
     }
     
-    init() {
-        loadSampleData()
+    func filter(for cuisine:CuisineType)->[Restaurant] {
+        restaurants.filter{restaurant in
+            if restaurant.cuisine.contains(cuisine) {
+                return true
+            }
+            return false
+        }
     }
+    func getFavouriyeRestaurants() -> [Restaurant]{
+        restaurants.filter{ restaurant in
+            return restaurant.isFavourite}
+    }
+  
     
     func loadSampleData() {
         let sampleData: [Restaurant] = [
@@ -28,7 +45,8 @@ class DataStore {
                 rating: 5.0,
                 reviews: [],
                 images: ["chicken_korma"],
-                cuisine: [.northIndian]
+                cuisine: [.northIndian],
+                isFavourite: false
             ),
             Restaurant(ID: UUID(),
                        name: "LA Kitchen",
@@ -37,7 +55,8 @@ class DataStore {
                        rating:4.0,
                        reviews: [],
                        images: ["china_palace_dxining"],
-                       cuisine: [.American]),
+                       cuisine: [.American],
+                      isFavourite: true),
             Restaurant(ID: UUID(),
                        name: "NYC Kitchen",
                        location: Location(latitude: 1.0, longitude: 1.0),
@@ -45,7 +64,8 @@ class DataStore {
                        rating:4.2,
                        reviews: [],
                        images: ["hot_dog"],
-                       cuisine: [.Mughlai])
+                       cuisine: [.Mughlai],
+                      isFavourite: false)
 
         ]
         

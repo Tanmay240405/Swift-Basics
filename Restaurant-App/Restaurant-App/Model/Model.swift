@@ -10,8 +10,20 @@ struct Location {
     var longitude: Double
 }
 
-enum CuisineType{
+enum CuisineType: String, CaseIterable{
     case chinese, italian, northIndian, Mughlai, Japanese, SouthIndian, French, American
+    var imageName: String {
+        switch self {
+        case .chinese: return "chinese"
+        case .italian: return "italian"
+        case .northIndian: return "north_indian"
+        case .Mughlai: return "mughlai"
+        case .Japanese: return "japanese"
+        case .SouthIndian: return "south_indian"
+        case .French: return "french"
+        case .American: return "american"
+        }
+    }
 }
 struct Restaurant {
     var ID: UUID
@@ -22,5 +34,6 @@ struct Restaurant {
     var reviews: [String]
     var images: [String]
     var cuisine: [CuisineType]
+    var isFavourite: Bool 
 }
 
