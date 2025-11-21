@@ -1,0 +1,485 @@
+{
+  "destinations": [
+    {
+      "id": "beach_1",
+      "name": "Male, Maldives",
+      "category": "beach",
+      "description": "The white sandy beach near the spa at Anantara Kihavah Maldives Villas in Baa Atoll, Maldives.",
+      "image_path": "beach_1.jpg"
+    },
+    {
+      "id": "beach_2",
+      "name": "Hulhumale, Maldives",
+      "category": "beach",
+      "description": "Beach view of a Maldivian island with blue skies, turquoise waters, white sands and vibrant green palm trees.",
+      "image_path": "beach_2.jpg"
+    },
+    {
+      "id": "beach_3",
+      "name": "Maafushi, Maldives",
+      "category": "beach",
+      "description": "Follow the over water villas to Beru Bar - perfect for sunset cocktails and late night dancing on our glass over water dance floor \ud83c\udf79\ud83d\udc1f ",
+      "image_path": "beach_3.jpg"
+    },
+    {
+      "id": "beach_4",
+      "name": "Seminyak, Indonesia",
+      "category": "beach",
+      "description": "beach and cliffs in Nusa Penida",
+      "image_path": "beach_4.jpg"
+    },
+    {
+      "id": "beach_5",
+      "name": "Nusa Dua, Indonesia",
+      "category": "beach",
+      "description": "The last night of a two week stay on the North Shore of Oahu, Hawaii.",
+      "image_path": "beach_5.jpg"
+    },
+    {
+      "id": "beach_6",
+      "name": "Uluwatu, Indonesia",
+      "category": "beach",
+      "description": "ocean photography",
+      "image_path": "beach_6.jpg"
+    },
+    {
+      "id": "beach_7",
+      "name": "Nassau, Bahamas",
+      "category": "beach",
+      "description": "The last night of a two week stay on the North Shore of Oahu, Hawaii.",
+      "image_path": "beach_7.jpg"
+    },
+    {
+      "id": "beach_8",
+      "name": "Montego Bay, Jamaica",
+      "category": "beach",
+      "description": "Pristine beach paradise in Montego Bay",
+      "image_path": "beach_8.jpg"
+    },
+    {
+      "id": "beach_9",
+      "name": "Punta Cana, Dominican Republic",
+      "category": "beach",
+      "description": "a rocky beach with a hut",
+      "image_path": "beach_9.jpg"
+    },
+    {
+      "id": "beach_10",
+      "name": "Victoria, Seychelles",
+      "category": "beach",
+      "description": "Dappled shade of a palm tree on a tropcial beach",
+      "image_path": "beach_10.jpg"
+    },
+    {
+      "id": "beach_11",
+      "name": "Praslin, Seychelles",
+      "category": "beach",
+      "description": "This shot was taken on a short hike to Anse Georgette, Praslin.",
+      "image_path": "beach_11.jpg"
+    },
+    {
+      "id": "beach_12",
+      "name": "La Digue, Seychelles",
+      "category": "beach",
+      "description": "Dazzling shoreline in Grande Anse, La Digue, Seychelles.",
+      "image_path": "beach_12.jpg"
+    },
+    {
+      "id": "beach_13",
+      "name": "Santorini, Greece",
+      "category": "beach",
+      "description": "ocean waves crashing on shore during sunset",
+      "image_path": "beach_13.jpg"
+    },
+    {
+      "id": "beach_14",
+      "name": "Mykonos, Greece",
+      "category": "beach",
+      "description": "Greek beach",
+      "image_path": "beach_14.jpg"
+    },
+    {
+      "id": "beach_15",
+      "name": "Crete, Greece",
+      "category": "beach",
+      "description": "Stairway to Paradise",
+      "image_path": "beach_15.jpg"
+    },
+    {
+      "id": "mountains_1",
+      "name": "Zermatt, Switzerland",
+      "category": "mountains",
+      "description": "On a perfect summer day, I hiked from the across the mountains and into the valley below, taking in views of the Top of Europe the whole time. How astounding this day was.",
+      "image_path": "mountains_1.jpg"
+    },
+    {
+      "id": "mountains_2",
+      "name": "Interlaken, Switzerland",
+      "category": "mountains",
+      "description": "Wonderful spring in the Alps",
+      "image_path": "mountains_2.jpg"
+    },
+    {
+      "id": "mountains_3",
+      "name": "Grindelwald, Switzerland",
+      "category": "mountains",
+      "description": "red and white train on rail road near snow covered mountain during daytime",
+      "image_path": "mountains_3.jpg"
+    },
+    {
+      "id": "mountains_4",
+      "name": "Kathmandu, Nepal",
+      "category": "mountains",
+      "description": "Views on the descent",
+      "image_path": "mountains_4.jpg"
+    },
+    {
+      "id": "mountains_5",
+      "name": "Pokhara, Nepal",
+      "category": "mountains",
+      "description": "A beautiful river flowing through the Himalayas. ",
+      "image_path": "mountains_5.jpg"
+    },
+    {
+      "id": "mountains_6",
+      "name": "Leh, India",
+      "category": "mountains",
+      "description": "A snow covered Ama Dablam with blue skies and clouds in Sagarmatha national park in Nepal, on the way to Everest Base Camp.",
+      "image_path": "mountains_6.jpg"
+    },
+    {
+      "id": "mountains_7",
+      "name": "Banff, Canada",
+      "category": "mountains",
+      "description": "Down into the valley",
+      "image_path": "mountains_7.jpg"
+    },
+    {
+      "id": "mountains_8",
+      "name": "Jasper, Canada",
+      "category": "mountains",
+      "description": "Lake in Colorado",
+      "image_path": "mountains_8.jpg"
+    },
+    {
+      "id": "mountains_9",
+      "name": "Aspen, USA",
+      "category": "mountains",
+      "description": "The view down the valley on a hike up Wasooch Peak. Most prominent peak is Mount Kidd.",
+      "image_path": "mountains_9.jpg"
+    },
+    {
+      "id": "mountains_10",
+      "name": "El Calafate, Argentina",
+      "category": "mountains",
+      "description": "a mountain covered in lots of trees next to a blue sky",
+      "image_path": "mountains_10.jpg"
+    },
+    {
+      "id": "mountains_11",
+      "name": "Torres del Paine, Chile",
+      "category": "mountains",
+      "description": "La Brecha approach to the Franco-Argentina route on Fitz Roy. ",
+      "image_path": "mountains_11.jpg"
+    },
+    {
+      "id": "mountains_12",
+      "name": "Ushuaia, Argentina",
+      "category": "mountains",
+      "description": "a mountain range with snow capped mountains in the background",
+      "image_path": "mountains_12.jpg"
+    },
+    {
+      "id": "mountains_13",
+      "name": "Cortina d'Ampezzo, Italy",
+      "category": "mountains",
+      "description": "The Sassolungo or Langkofel on the left is the highest mountain of the Langkofel Group in the Dolomites in South Tyrol, Italy. Sasso piatto  or Plattkofel is the flat mountain on the right.\nhttps://www.instagram.com/chielr/",
+      "image_path": "mountains_13.jpg"
+    },
+    {
+      "id": "mountains_14",
+      "name": "Val Gardena, Italy",
+      "category": "mountains",
+      "description": "green grass field near snow covered mountain during daytime",
+      "image_path": "mountains_14.jpg"
+    },
+    {
+      "id": "mountains_15",
+      "name": "Tre Cime, Italy",
+      "category": "mountains",
+      "description": "During a night photoshoot session\nWe waited for ours, in a cold and windy summer night, to make only some shots of the night sky. \nNicola Pavan\u00a9",
+      "image_path": "mountains_15.jpg"
+    },
+    {
+      "id": "urban_1",
+      "name": "Shibuya, Japan",
+      "category": "urban",
+      "description": "An unlimited view of Tokyo and the Mt Fuji",
+      "image_path": "urban_1.jpg"
+    },
+    {
+      "id": "urban_2",
+      "name": "Shinjuku, Japan",
+      "category": "urban",
+      "description": "Shopping in Shibuya",
+      "image_path": "urban_2.jpg"
+    },
+    {
+      "id": "urban_3",
+      "name": "Ginza, Japan",
+      "category": "urban",
+      "description": "The best place to take a photo of the Tokyo Tower is at the viewing deck of Mori building in Roponggi Hills",
+      "image_path": "urban_3.jpg"
+    },
+    {
+      "id": "urban_4",
+      "name": "Manhattan, USA",
+      "category": "urban",
+      "description": "Empire State building",
+      "image_path": "urban_4.jpg"
+    },
+    {
+      "id": "urban_5",
+      "name": "Brooklyn, USA",
+      "category": "urban",
+      "description": "Manhattan in the distance",
+      "image_path": "urban_5.jpg"
+    },
+    {
+      "id": "urban_6",
+      "name": "Times Square, USA",
+      "category": "urban",
+      "description": "Times Square in New York City at night.",
+      "image_path": "urban_6.jpg"
+    },
+    {
+      "id": "urban_7",
+      "name": "Champs-\u00c9lys\u00e9es, France",
+      "category": "urban",
+      "description": "high-rise buildings during daytime",
+      "image_path": "urban_7.jpg"
+    },
+    {
+      "id": "urban_8",
+      "name": "Montmartre, France",
+      "category": "urban",
+      "description": "Parisian bridge",
+      "image_path": "urban_8.jpg"
+    },
+    {
+      "id": "urban_9",
+      "name": "Le Marais, France",
+      "category": "urban",
+      "description": "The owner of the copyrighted asset is Reva Group",
+      "image_path": "urban_9.jpg"
+    },
+    {
+      "id": "urban_10",
+      "name": "Downtown Dubai, UAE",
+      "category": "urban",
+      "description": "Sunrise shot of Downtown Dubai and Burj Khalifa.",
+      "image_path": "urban_10.jpg"
+    },
+    {
+      "id": "urban_11",
+      "name": "Dubai Marina, UAE",
+      "category": "urban",
+      "description": "city during day",
+      "image_path": "urban_11.jpg"
+    },
+    {
+      "id": "urban_12",
+      "name": "Palm Jumeirah, UAE",
+      "category": "urban",
+      "description": "a view of a city at night from across the water",
+      "image_path": "urban_12.jpg"
+    },
+    {
+      "id": "tropical_1",
+      "name": "Vaitape, French Polynesia",
+      "category": "tropical",
+      "description": "Bora Bora - French Polynesia",
+      "image_path": "tropical_1.jpg"
+    },
+    {
+      "id": "tropical_2",
+      "name": "Bora Bora, French Polynesia",
+      "category": "tropical",
+      "description": "Tropical paradise in Bora Bora",
+      "image_path": "tropical_2.jpg"
+    },
+    {
+      "id": "tropical_3",
+      "name": "Matira, French Polynesia",
+      "category": "tropical",
+      "description": "Beautiful landscape on arrival to Bora-Bora.",
+      "image_path": "tropical_3.jpg"
+    },
+    {
+      "id": "tropical_4",
+      "name": "Manaus, Brazil",
+      "category": "tropical",
+      "description": "aerial view of green trees and river during daytime",
+      "image_path": "tropical_4.jpg"
+    },
+    {
+      "id": "tropical_5",
+      "name": "Iquitos, Peru",
+      "category": "tropical",
+      "description": "Roadtripping in Iasi, Romania. \u2013\u2013 https://www.buymeacoffee.com/vladhilitanu \u2013\u2013 If you appreciate my work, give it a shout and buy me a coffee.",
+      "image_path": "tropical_5.jpg"
+    },
+    {
+      "id": "tropical_6",
+      "name": "Puerto Maldonado, Peru",
+      "category": "tropical",
+      "description": "green trees on mountain during daytime",
+      "image_path": "tropical_6.jpg"
+    },
+    {
+      "id": "tropical_7",
+      "name": "Manuel Antonio, Costa Rica",
+      "category": "tropical",
+      "description": "man standing near waterfalls",
+      "image_path": "tropical_7.jpg"
+    },
+    {
+      "id": "tropical_8",
+      "name": "Monteverde, Costa Rica",
+      "category": "tropical",
+      "description": "green plants on mountain during daytime",
+      "image_path": "tropical_8.jpg"
+    },
+    {
+      "id": "tropical_9",
+      "name": "Tortuguero, Costa Rica",
+      "category": "tropical",
+      "description": "woman standing infront of waterfall",
+      "image_path": "tropical_9.jpg"
+    },
+    {
+      "id": "tropical_10",
+      "name": "Phuket, Thailand",
+      "category": "tropical",
+      "description": "A large group of palm trees in a forest",
+      "image_path": "tropical_10.jpg"
+    },
+    {
+      "id": "tropical_11",
+      "name": "Krabi, Thailand",
+      "category": "tropical",
+      "description": "Tropical Flower ",
+      "image_path": "tropical_11.jpg"
+    },
+    {
+      "id": "tropical_12",
+      "name": "Koh Samui, Thailand",
+      "category": "tropical",
+      "description": "Not entirely sure how much more I can say about the calming Bangkok cityscapes as I\u2019ve posted quite a few photos over time but they all just look so incredible! Do try to get up high when visiting Bangkok to see it for yourself.",
+      "image_path": "tropical_12.jpg"
+    },
+    {
+      "id": "desert_1",
+      "name": "Merzouga, Morocco",
+      "category": "desert",
+      "description": "Dry Desolation",
+      "image_path": "desert_1.jpg"
+    },
+    {
+      "id": "desert_2",
+      "name": "Erg Chebbi, Morocco",
+      "category": "desert",
+      "description": "Merzouga in the early morning",
+      "image_path": "desert_2.jpg"
+    },
+    {
+      "id": "desert_3",
+      "name": "Zagora, Morocco",
+      "category": "desert",
+      "description": "Instagram: @fabistru\n\n",
+      "image_path": "desert_3.jpg"
+    },
+    {
+      "id": "desert_4",
+      "name": "Sedona, USA",
+      "category": "desert",
+      "description": "Sunlight cuts through the desert at sundown.",
+      "image_path": "desert_4.jpg"
+    },
+    {
+      "id": "desert_5",
+      "name": "Monument Valley, USA",
+      "category": "desert",
+      "description": "Desert Sunrise at Sabino Canyon with Saguaros",
+      "image_path": "desert_5.jpg"
+    },
+    {
+      "id": "desert_6",
+      "name": "Grand Canyon, USA",
+      "category": "desert",
+      "description": "Walking down the Wildcat trail in Monument Valley opens up this magnificent view to everyone. Amazing weather and good light helped us with this picture.",
+      "image_path": "desert_6.jpg"
+    },
+    {
+      "id": "desert_7",
+      "name": "Al Marmoom, UAE",
+      "category": "desert",
+      "description": "vehicles on desert during daytime",
+      "image_path": "desert_7.jpg"
+    },
+    {
+      "id": "desert_8",
+      "name": "Liwa Oasis, UAE",
+      "category": "desert",
+      "description": "Dubai desert dunes",
+      "image_path": "desert_8.jpg"
+    },
+    {
+      "id": "desert_9",
+      "name": "Hatta, UAE",
+      "category": "desert",
+      "description": "Morocco, Sahara.",
+      "image_path": "desert_9.jpg"
+    },
+    {
+      "id": "desert_10",
+      "name": "San Pedro de Atacama, Chile",
+      "category": "desert",
+      "description": "Walking Through The Desert. More on Instagram: @DiegoJimenez",
+      "image_path": "desert_10.jpg"
+    },
+    {
+      "id": "cultural_1",
+      "name": "Cusco, Peru",
+      "category": "cultural",
+      "description": "Machu Picchu, Cusco - Per\u00fa",
+      "image_path": "cultural_1.jpg"
+    },
+    {
+      "id": "cultural_2",
+      "name": "Aguas Calientes, Peru",
+      "category": "cultural",
+      "description": "Piece of history",
+      "image_path": "cultural_2.jpg"
+    },
+    {
+      "id": "cultural_3",
+      "name": "Sacred Valley, Peru",
+      "category": "cultural",
+      "description": "Machu Picchu, Peru. One of the new Seven Wonders of the World.",
+      "image_path": "cultural_3.jpg"
+    }
+  ],
+  "total_count": 67,
+  "categories": [
+    "beach",
+    "mountains",
+    "urban",
+    "tropical",
+    "desert",
+    "cultural",
+    "adventure",
+    "countryside"
+  ],
+  "generated_at": "2025-11-20 22:22:56"
+}
