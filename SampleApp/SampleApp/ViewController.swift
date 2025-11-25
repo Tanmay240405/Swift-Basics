@@ -14,6 +14,8 @@ class ViewController: UIViewController,
         registerCells()
         collectionView.dataSource = self
         collectionView.delegate = self
+        self.edgesForExtendedLayout = [.top, .bottom]
+        self.extendedLayoutIncludesOpaqueBars = true
         
         collectionView.setCollectionViewLayout(generateLayout(), animated: true)
     }
@@ -37,7 +39,7 @@ class ViewController: UIViewController,
           
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),   
-                heightDimension: .absolute(500)
+                heightDimension: .absolute(400)
             )
             
             let group = NSCollectionLayoutGroup.horizontal(

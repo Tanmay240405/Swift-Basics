@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TopMountainCollectionViewCell" customModule="TravelDestinationsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="429" height="202"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="429" height="202"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgG-KB-aWL">
+                        <rect key="frame" x="0.0" y="0.0" width="429" height="202"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bnO-cD-Fm7">
+                                <rect key="frame" x="274" y="13" width="136" height="136"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Wyh-ru-IWF"/>
+                                    <constraint firstAttribute="width" constant="136" id="bIQ-ed-gxQ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="j6S-qw-y3i"/>
+                                    <constraint firstAttribute="height" constant="136" id="sYB-vn-sq2"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bnO-cD-Fm7" secondAttribute="bottom" constant="53" id="6mU-KD-LBc"/>
+                            <constraint firstAttribute="trailing" secondItem="bnO-cD-Fm7" secondAttribute="trailing" constant="19" id="Rnf-Wt-UAu"/>
+                            <constraint firstItem="bnO-cD-Fm7" firstAttribute="top" secondItem="kgG-KB-aWL" secondAttribute="top" constant="13" id="aZ6-1A-Zgm"/>
+                            <constraint firstItem="bnO-cD-Fm7" firstAttribute="leading" secondItem="kgG-KB-aWL" secondAttribute="leading" constant="274" id="k3S-eN-SEd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="429" height="202"/>
+            <connections>
+                <outlet property="beachView" destination="kgG-KB-aWL" id="kKh-vR-QfC"/>
+                <outlet property="mountainImageView" destination="bnO-cD-Fm7" id="bNP-sK-C7Q"/>
+            </connections>
+            <point key="canvasLocation" x="428.24427480916029" y="100"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
