@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--News View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="NewsViewController" customModule="sample1234" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSW-ju-NSI">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGl-mP-Kf0">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1300"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="news_1" translatesAutoresizingMaskIntoConstraints="NO" id="bCH-eY-lz8">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="344"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NgK-LI-Unb">
+                                                <rect key="frame" x="0.0" y="-7" width="393" height="604"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="BBC news  3 hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-8v-w0G">
+                                                <rect key="frame" x="9" y="220" width="333" height="13.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Nifty above 25,000, Sensex rises 583 pts led by IT, finance" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWm-UU-nhx">
+                                                <rect key="frame" x="9" y="237" width="373" height="45.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NdC-uN-K7c">
+                                                <rect key="frame" x="8" y="309" width="375" height="32"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <segments>
+                                                    <segment title="Overview"/>
+                                                    <segment title="Key Takeaways"/>
+                                                </segments>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="selectedSegmentTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </segmentedControl>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IcK-ME-fgI">
+                                                <rect key="frame" x="16" y="347" width="359" height="424"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWq-j6-UiB">
+                                                        <rect key="frame" x="15" y="17" width="336" height="392"/>
+                                                        <string key="text">The market continued its upward move on Friday, with Nifty gaining 103 points and closing near the day’s high, showing strong buying interest throughout the session.
+
+Bullish patterns on the daily and weekly charts indicate that the ongoing uptrend is healthy and likely to continue in the coming week.
+
+Nifty may face resistance around the 25,400–25,550 zone, while strong support near 25,150 suggests that any pullback could be short-lived.
+
+Overall sentiment remains positive, and dips are expected to attract fresh buying.   </string>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="424" id="C6W-sA-FkO"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eWq-j6-UiB" secondAttribute="bottom" constant="15" id="S0O-zE-W7P"/>
+                                                    <constraint firstItem="eWq-j6-UiB" firstAttribute="top" secondItem="IcK-ME-fgI" secondAttribute="top" constant="15" id="TyY-wo-VuA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eWq-j6-UiB" secondAttribute="trailing" constant="15" id="ZhO-cs-WoO"/>
+                                                    <constraint firstItem="eWq-j6-UiB" firstAttribute="leading" secondItem="IcK-ME-fgI" secondAttribute="leading" constant="15" id="u5W-KT-fSx"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1300" id="8Fs-Bs-hu2"/>
+                                            <constraint firstItem="tWm-UU-nhx" firstAttribute="top" secondItem="XFg-8v-w0G" secondAttribute="bottom" constant="4" id="Ije-il-G2L"/>
+                                            <constraint firstItem="NdC-uN-K7c" firstAttribute="top" secondItem="tWm-UU-nhx" secondAttribute="bottom" constant="26" id="SCw-J7-ncB"/>
+                                            <constraint firstItem="IcK-ME-fgI" firstAttribute="top" secondItem="NdC-uN-K7c" secondAttribute="bottom" constant="7" id="j3F-Wl-gWo"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="oGl-mP-Kf0" firstAttribute="top" secondItem="bSW-ju-NSI" secondAttribute="top" id="Ho2-XO-SqG"/>
+                                    <constraint firstItem="oGl-mP-Kf0" firstAttribute="centerX" secondItem="bSW-ju-NSI" secondAttribute="centerX" id="cOJ-Tg-JXR"/>
+                                    <constraint firstAttribute="bottom" secondItem="oGl-mP-Kf0" secondAttribute="bottom" id="d0D-7U-HSf"/>
+                                    <constraint firstItem="oGl-mP-Kf0" firstAttribute="leading" secondItem="bSW-ju-NSI" secondAttribute="leading" id="dNM-yo-31K"/>
+                                    <constraint firstAttribute="trailing" secondItem="oGl-mP-Kf0" secondAttribute="trailing" id="qc3-6J-eAF"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gkA-ho-xKR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bSW-ju-NSI" firstAttribute="leading" secondItem="gkA-ho-xKR" secondAttribute="leading" id="2mP-6P-AgP"/>
+                            <constraint firstAttribute="bottom" secondItem="bSW-ju-NSI" secondAttribute="bottom" id="o7F-OF-a4S"/>
+                            <constraint firstItem="bSW-ju-NSI" firstAttribute="trailing" secondItem="gkA-ho-xKR" secondAttribute="trailing" id="xik-Ve-x2I"/>
+                            <constraint firstItem="bSW-ju-NSI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yLn-zy-kzB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="gradientImageView" destination="NgK-LI-Unb" id="FI1-mG-D7t"/>
+                        <outlet property="overviewTextLabel" destination="eWq-j6-UiB" id="1XJ-KS-NuC"/>
+                        <outlet property="topImageView" destination="bCH-eY-lz8" id="Kbq-Ar-w2V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11.450381679389313" y="136.61971830985917"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="news_1" width="1200" height="525"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
