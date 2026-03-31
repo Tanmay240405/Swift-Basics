@@ -15,11 +15,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     var imageFrame: CGRect = .zero
     var faceRect: CGRect = .zero
+    let outlineImageView = UIImageView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         overlayView.backgroundColor = .clear
         overlayView.isUserInteractionEnabled = false
+        setupOverlay()
+
+    }
+    func setupOverlay() {
+        outlineImageView.backgroundColor = .clear
+        outlineImageView.contentMode = .scaleToFill
+        outlineImageView.isUserInteractionEnabled = false
+        imageView.addSubview(outlineImageView)
     }
     
     @IBAction func pickImageTapped(_ sender: UIButton) {
@@ -31,6 +41,99 @@ class ViewController: UIViewController {
         picker.delegate = self
         present(picker, animated: true)
     }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        dismiss(animated: true)
+        guard let image = info[.originalImage] as? UIImage else { return }
+        imageView.image = image
+
+        imageView.layoutIfNeeded()
+        outlineImageView.frame = imageFrameInImageView(imageView)
+        outlineImageView.image = nil
+
+        processImage(image)
+    }
+    func processImage(_ image: UIImage) {
+        guard let cgImage = image.cgImage else { return }
+        
+        // 1️⃣ Handle Orientation (Crucial!)
+        // Standard CGImage loses orientation; we must recover it from the UIImage
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+
+        // 2️⃣ Person Segmentation Request
+        let request = VNGeneratePersonSegmentationRequest()
+        request.qualityLevel = .balanced
+        request.outputPixelFormat = kCVPixelFormatType_OneComponent8
+
+        let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation, options: [:])
+        
+        do {
+            try handler.perform([request])
+            
+            guard let maskBuffer = request.results?.first?.pixelBuffer else {
+                print("No person found in image")
+                return
+            }
+            
+            // 3️⃣ Generate Outline using Core Image (Fast & Clean)
+            drawFaceOutline(from: maskBuffer, originalOrientation: image.imageOrientation)
+            
+        } catch {
+            print("Vision request failed: \(error)")
+        }
+    }
+func imageFrameInImageView(_ imageView: UIImageView) -> CGRect {
+    guard let image = imageView.image else { return .zero }
+
+    let imageRatio = image.size.width / image.size.height
+    let viewRatio = imageView.bounds.width / imageView.bounds.height
+
+    if imageRatio > viewRatio {
+        let width = imageView.bounds.width
+        let height = width / imageRatio
+        let y = (imageView.bounds.height - height) / 2
+        return CGRect(x: 0, y: y, width: width, height: height)
+    } else {
+        let height = imageView.bounds.height
+        let width = height * imageRatio
+        let x = (imageView.bounds.width - width) / 2
+        return CGRect(x: x, y: 0, width: width, height: height)
+    }
+}
+    func drawFaceOutline(from pixelBuffer: CVPixelBuffer, originalOrientation: UIImage.Orientation) {
+        let ciContext = CIContext()
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+
+        // 1. Create Edges from the Mask
+        guard let edgesFilter = CIFilter(name: "CIEdges") else { return }
+        edgesFilter.setValue(ciImage, forKey: kCIInputImageKey)
+        edgesFilter.setValue(30.0, forKey: kCIInputIntensityKey) // Adjust for thicker/thinner lines
+        guard let edgesImage = edgesFilter.outputImage else { return }
+
+        // 2. Make non-edges transparent (White lines on Transparent background)
+        // 2. Make non-edges transparent
+        guard let maskFilter = CIFilter(name: "CIMaskToAlpha") else { return }
+        maskFilter.setValue(edgesImage, forKey: kCIInputImageKey)
+        guard let alphaMask = maskFilter.outputImage else { return }
+
+        // 3. THICKEN the lines using morphology
+        guard let thickFilter = CIFilter(name: "CIMorphologyMaximum") else { return }
+        thickFilter.setValue(alphaMask, forKey: kCIInputImageKey)
+        thickFilter.setValue(2.0, forKey: "inputRadius") // 🔥 THIS controls thickness
+        guard let thickImage = thickFilter.outputImage else { return }
+
+        // 3. Render the CIImage to a UIImage
+        if let cgResult = ciContext.createCGImage(alphaMask, from: alphaMask.extent) {
+            
+            // We must respect the original photo's orientation when creating the final UIImage
+            let finalImage = UIImage(cgImage: cgResult, scale: 1.0, orientation: originalOrientation)
+            
+            DispatchQueue.main.async {
+                self.outlineImageView.image = finalImage
+                self.outlineImageView.tintColor = .white
+            }
+        }
+    }
+
     
     // MARK: - Face Detection
     
@@ -47,11 +150,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 // Draw Step 1: Guide Cross
                 self.drawStep1GuideLines(for: face)
-                
-                // After 1 second, draw Step 2: Face Outline
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.drawStep2FaceOutline(for: face)
-                }
+
             }
         }
         
@@ -94,9 +193,7 @@ class ViewController: UIViewController {
         
         // Draw intersection point
         drawIntersectionPoint(at: eyesMidpoint)
-        
-        // Add step label
-        addStepLabel(text: "Step 1: Guide Cross", at: CGPoint(x: imageFrame.midX, y: imageFrame.maxY - 50))
+//        drawJawline(for: face)
     }
     
     func drawHorizontalEyeLine(from leftEye: CGPoint, to rightEye: CGPoint, faceRect: CGRect) {
@@ -186,239 +283,6 @@ class ViewController: UIViewController {
         overlayView.layer.addSublayer(circleLayer)
     }
     
-    // MARK: - STEP 2: Animated Face Outline (Using Landmarks)
-    
-    func drawStep2FaceOutline(for face: VNFaceObservation) {
-        // Remove step 1 label
-        overlayView.layer.sublayers?.forEach { layer in
-            if layer.name == "step_label" {
-                layer.removeFromSuperlayer()
-            }
-        }
-        
-        guard let landmarks = face.landmarks else { return }
-        
-        // Create complete face outline path from landmarks
-        let completePath = UIBezierPath()
-        
-        // 1. Face Contour (jawline and sides)
-        if let faceContour = landmarks.faceContour {
-            let points = faceContour.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-            }
-        }
-        
-        // 2. Left Eyebrow
-        if let leftEyebrow = landmarks.leftEyebrow {
-            let points = leftEyebrow.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-            }
-        }
-        
-        // 3. Right Eyebrow
-        if let rightEyebrow = landmarks.rightEyebrow {
-            let points = rightEyebrow.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-            }
-        }
-        
-        // 4. Left Eye
-        if let leftEye = landmarks.leftEye {
-            let points = leftEye.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-                completePath.close()
-            }
-        }
-        
-        // 5. Right Eye
-        if let rightEye = landmarks.rightEye {
-            let points = rightEye.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-                completePath.close()
-            }
-        }
-        
-        // 6. Nose
-        if let nose = landmarks.nose {
-            let points = nose.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-            }
-        }
-        
-        // 7. Nose Crest
-        if let noseCrest = landmarks.noseCrest {
-            let points = noseCrest.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-            }
-        }
-        
-        // 8. Outer Lips
-        if let outerLips = landmarks.outerLips {
-            let points = outerLips.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-                completePath.close()
-            }
-        }
-        
-        // 9. Inner Lips
-        if let innerLips = landmarks.innerLips {
-            let points = innerLips.normalizedPoints.map { convertPoint($0, faceRect: faceRect) }
-            if let first = points.first {
-                completePath.move(to: first)
-                for point in points.dropFirst() {
-                    completePath.addLine(to: point)
-                }
-                completePath.close()
-            }
-        }
-        
-        // Add forehead outline (extended from eyebrows)
-        addForeheadOutline(to: completePath, landmarks: landmarks)
-        completePath.close()
-        
-        // Create the shape layer
-        let outlineLayer = CAShapeLayer()
-        outlineLayer.path = completePath.cgPath
-        outlineLayer.strokeColor = UIColor.white.cgColor
-        outlineLayer.fillColor = UIColor.clear.cgColor
-        outlineLayer.lineWidth = 3.0
-        outlineLayer.lineCap = .round
-        outlineLayer.lineJoin = .round
-        outlineLayer.name = "step2_outline"
-        
-        // Animate the stroke
-        outlineLayer.strokeEnd = 0
-        
-        overlayView.layer.addSublayer(outlineLayer)
-        
-        // Animate drawing the outline
-        let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        drawAnimation.fromValue = 0
-        drawAnimation.toValue = 1
-        drawAnimation.duration = 3.0
-        drawAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        drawAnimation.fillMode = .forwards
-        drawAnimation.isRemovedOnCompletion = false
-        
-        outlineLayer.add(drawAnimation, forKey: "drawOutline")
-        outlineLayer.strokeEnd = 1
-        
-        // Add step 2 label
-        addStepLabel(text: "Step 2: Face Outline - Sketch this!", at: CGPoint(x: imageFrame.midX, y: imageFrame.maxY - 50))
-        
-        // Optional: Add semi-transparent fill
-        addFaceShading(landmarks: landmarks)
-    }
-    
-    func addForeheadOutline(to path: UIBezierPath, landmarks: VNFaceLandmarks2D) {
-        guard
-            let leftEyebrow = landmarks.leftEyebrow,
-            let rightEyebrow = landmarks.rightEyebrow,
-            let faceContour = landmarks.faceContour
-        else { return }
-
-        let leftBrowPoints = leftEyebrow.normalizedPoints.map {
-            convertPoint($0, faceRect: faceRect)
-        }
-        let rightBrowPoints = rightEyebrow.normalizedPoints.map {
-            convertPoint($0, faceRect: faceRect)
-        }
-        let contourPoints = faceContour.normalizedPoints.map {
-            convertPoint($0, faceRect: faceRect)
-        }
-
-        // Brow highest points
-        guard
-            let leftBrowTop = leftBrowPoints.min(by: { $0.y < $1.y }),
-            let rightBrowTop = rightBrowPoints.min(by: { $0.y < $1.y }),
-            let leftTemple = contourPoints.first,
-            let rightTemple = contourPoints.last
-        else { return }
-
-        // Forehead height estimation
-        let browY = min(leftBrowTop.y, rightBrowTop.y)
-        let foreheadHeight = faceRect.height * 0.28
-        let foreheadTopY = browY - foreheadHeight
-
-        // Forehead curve control points
-        let topCenter = CGPoint(x: faceRect.midX, y: foreheadTopY)
-
-        let cpLeft = CGPoint(
-            x: faceRect.midX - faceRect.width * 0.45,
-            y: foreheadTopY - faceRect.height * 0.05
-        )
-
-        let cpRight = CGPoint(
-            x: faceRect.midX + faceRect.width * 0.45,
-            y: foreheadTopY - faceRect.height * 0.05
-        )
-
-        // Draw smooth forehead arc
-        path.addQuadCurve(to: topCenter, controlPoint: cpLeft)
-        path.addQuadCurve(to: rightTemple, controlPoint: cpRight)
-    }
-    
-    func addFaceShading(landmarks: VNFaceLandmarks2D) {
-        guard let faceContour = landmarks.faceContour else { return }
-        
-        let points = faceContour.normalizedPoints.map {
-            convertPoint($0, faceRect: faceRect)
-        }
-        
-        let shadePath = UIBezierPath()
-        if let first = points.first {
-            shadePath.move(to: first)
-            for point in points.dropFirst() {
-                shadePath.addLine(to: point)
-            }
-            shadePath.close()
-        }
-        
-        let shadeLayer = CAShapeLayer()
-        shadeLayer.path = shadePath.cgPath
-        shadeLayer.fillColor = UIColor.white.withAlphaComponent(0.1).cgColor
-        shadeLayer.name = "step2_shade"
-        
-        // Insert behind the outline
-        if let outlineLayer = overlayView.layer.sublayers?.first(where: { $0.name == "step2_outline" }) {
-            overlayView.layer.insertSublayer(shadeLayer, below: outlineLayer)
-        } else {
-            overlayView.layer.addSublayer(shadeLayer)
-        }
-    }
-    
     // MARK: - Helper Functions
     
     func addStepLabel(text: String, at position: CGPoint) {
@@ -492,25 +356,81 @@ class ViewController: UIViewController {
             y: faceRect.origin.y + (1 - point.y) * faceRect.height
         )
     }
+    func drawJawline(for face: VNFaceObservation) {
+        guard let contour = face.landmarks?.faceContour else { return }
+
+        let points = contour.normalizedPoints.map {
+            convertPoint($0, faceRect: faceRect)
+        }
+
+        guard let first = points.first else { return }
+
+        let path = UIBezierPath()
+        path.move(to: first)
+        for point in points.dropFirst() {
+            path.addLine(to: point)
+        }
+
+        let jawLayer = CAShapeLayer()
+        jawLayer.path = path.cgPath
+        jawLayer.strokeColor = UIColor.white.cgColor
+        jawLayer.fillColor = UIColor.clear.cgColor
+        jawLayer.lineWidth = 3.0
+        jawLayer.lineCap = .round
+        jawLayer.lineJoin = .round
+        jawLayer.name = "jawline"
+
+        overlayView.layer.addSublayer(jawLayer)
+    }
 }
 
 // MARK: - Picker Delegate
 
 extension ViewController: PHPickerViewControllerDelegate {
-    
+
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
-        
-        guard let provider = results.first?.itemProvider,
-              provider.canLoadObject(ofClass: UIImage.self) else { return }
-        
+
+        guard
+            let provider = results.first?.itemProvider,
+            provider.canLoadObject(ofClass: UIImage.self)
+        else { return }
+
         provider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
             DispatchQueue.main.async {
-                if let img = image as? UIImage {
-                    self?.imageView.image = img
-                    self?.detectFace(in: img)
-                }
+                guard let self, let img = image as? UIImage else { return }
+
+                // 1️⃣ Set image
+                self.imageView.image = img
+                self.imageView.layoutIfNeeded()
+
+                // 2️⃣ Align boundary overlay (CRITICAL)
+                self.outlineImageView.frame = self.imageFrameInImageView(self.imageView)
+                self.outlineImageView.image = nil
+
+                // 3️⃣ CLEAR previous cross
+                self.overlayView.layer.sublayers?.removeAll()
+
+                // 4️⃣ RUN BOTH PIPELINES
+                self.processImage(img)      // 🔸 FACE BOUNDARY
+                self.detectFace(in: img)    // 🔹 CROSS
             }
         }
     }
 }
+extension CGImagePropertyOrientation {
+    init(_ uiOrientation: UIImage.Orientation) {
+        switch uiOrientation {
+        case .up: self = .up
+        case .upMirrored: self = .upMirrored
+        case .down: self = .down
+        case .downMirrored: self = .downMirrored
+        case .left: self = .left
+        case .leftMirrored: self = .leftMirrored
+        case .right: self = .right
+        case .rightMirrored: self = .rightMirrored
+        @unknown default: self = .up
+        }
+    }
+}
+
